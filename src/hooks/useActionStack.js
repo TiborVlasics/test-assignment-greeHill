@@ -9,13 +9,11 @@ function useActionStack() {
     };
 
     function onUndo() {
-        //TODO
-        console.log('undoing');
+        dispatch({ type: 'undo' });
     };
 
     function onRedo() {
-        //TODO
-        console.log('redoing')
+        dispatch({ type: 'redo' });
     };
 
     return [state.present, onAction, onUndo, onRedo]
