@@ -1,11 +1,17 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import useActionStack from './hooks/useActionStack';
 
 function NewActionForm() {
   const [config, setConfig] = useState({ 
-    dev: true,
-    qa: true,
+    dev: false,
+    qa: false,
     prod: false
   });
+  const [present, onAction, onUndo, onRedo] = useActionStack();
+
+  useEffect(() => {
+      setConfig(present)
+  }, [present])
 
   const handlechange = function(key) {
     setConfig({ ...config, [key]: !config[key] });
@@ -41,8 +47,16 @@ function NewActionForm() {
         />
       </div>
       <div>
-        <button>
+        <button onClick={() => onAction(config)}>
           Set Action
+        </button>
+      </div>
+      <div>
+        <button onClick={() => onUndo()}>
+          Undo
+        </button>
+        <button onClick={() => onRedo()}>
+          redo
         </button>
       </div>
     </div>
