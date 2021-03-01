@@ -7,7 +7,7 @@ function NewActionForm() {
     qa: false,
     prod: false
   });
-  const [present, onAction, onUndo, onRedo] = useActionStack();
+  const [present, isUndoAvailable, isRedoAvailable, onAction, onUndo, onRedo] = useActionStack();
 
   useEffect(() => {
       setConfig(present)
@@ -52,10 +52,10 @@ function NewActionForm() {
         </button>
       </div>
       <div>
-        <button onClick={() => onUndo()}>
+        <button disabled={!isUndoAvailable} onClick={() => onUndo()}>
           Undo
         </button>
-        <button onClick={() => onRedo()}>
+        <button disabled={!isRedoAvailable} onClick={() => onRedo()}>
           redo
         </button>
       </div>
