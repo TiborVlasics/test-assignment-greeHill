@@ -1,24 +1,22 @@
 import { useEffect, useState } from 'react';
-import useActionStack from './hooks/useActionStack';
 
-function NewActionForm() {
+function NewActionForm(props) {
   const [config, setConfig] = useState({ 
     dev: false,
     qa: false,
     prod: false
   });
-  const [present, isUndoAvailable, isRedoAvailable, onAction, onUndo, onRedo] = useActionStack();
 
   useEffect(() => {
-      setConfig(present)
-  }, [present])
+      setConfig(props.currentAction)
+  }, [props.currentAction])
 
   const handlechange = function(key) {
     setConfig({ ...config, [key]: !config[key] });
   }
 
   return (
-    <div className="App">
+    <div>
       <div>
         <label htmlFor="dev">Dev</label>
         <input
@@ -47,15 +45,15 @@ function NewActionForm() {
         />
       </div>
       <div>
-        <button onClick={() => onAction(config)}>
+        <button onClick={() => props.onAction(config)}>
           Set Action
         </button>
       </div>
       <div>
-        <button disabled={!isUndoAvailable} onClick={() => onUndo()}>
+        <button disabled={!props.isUndoAvailable} onClick={() => props.onUndo()}>
           Undo
         </button>
-        <button disabled={!isRedoAvailable} onClick={() => onRedo()}>
+        <button disabled={!props.isRedoAvailable} onClick={() => props.onRedo()}>
           redo
         </button>
       </div>
