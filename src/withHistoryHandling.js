@@ -9,11 +9,11 @@ const withHistoryHandling = WrappedComponent => props => {
   const currentAction = useCurrentAction(state);
 
   useEffect(() => {
-    state.presentIndex > 0 
+    state.currentIndex > 0 
       ? setUndoAvailable(true)
       : setUndoAvailable(false);
 
-    state.presentIndex + 1 < state.actionStack.length
+    state.currentIndex + 1 < state.actionStack.length
       ? setRedoAvailable(true)
       : setRedoAvailable(false)
   }, [state])
@@ -22,7 +22,7 @@ const withHistoryHandling = WrappedComponent => props => {
    * 
    * @param {*} action 
    * 
-   * Dispatches only the properties that changed to the action stack
+   * Dispatches the changed properties, to the action stack
    */
   function onAction(action) {
     const newAction = ['dev', 'qa', 'prod'].reduce((acc, key) => {
@@ -54,7 +54,7 @@ const withHistoryHandling = WrappedComponent => props => {
     isUndoAvailable={isUndoAvailable}
     isRedoAvailable={isRedoAvailable}
     currentAction={currentAction}
-    currentIndex={state.presentIndex}
+    currentIndex={state.currentIndex}
     actionStack={state.actionStack}
   />;
 }

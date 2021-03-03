@@ -1,11 +1,7 @@
 import { useEffect, useState } from 'react';
 
 function NewActionForm(props) {
-  const [config, setConfig] = useState({ 
-    dev: false,
-    qa: false,
-    prod: false
-  });
+  const [config, setConfig] = useState(props.currentAction);
 
   useEffect(() => {
       setConfig(props.currentAction)

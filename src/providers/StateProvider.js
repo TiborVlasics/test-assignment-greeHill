@@ -2,8 +2,7 @@ import React, {createContext, useReducer} from 'react';
 
 const initialState = {
     actionStack: [{ dev: true, qa: true, prod: false }],
-    presentIndex: 0,
-    present: { dev: true, qa: true, prod: false },
+    currentIndex: 0,
 };
 const store = createContext(initialState);
 const { Provider } = store;
@@ -28,32 +27,29 @@ const StateProvider = ( { children } ) => {
 function setAction(state, action) {
   const newState = {
     actionStack: [
-      ...state.actionStack.slice(0, state.presentIndex + 1),
+      ...state.actionStack.slice(0, state.currentIndex + 1),
       action.payload
     ],
-    present: action.payload,
-    presentIndex: state.presentIndex + 1
+    currentIndex: state.currentIndex + 1
   };
   return newState;
 }
 
 function undo(state) {
-  if(state.presentIndex > 0) {
+  if(state.currentIndex > 0) {
     return {
-      ...state, 
-      presentIndex: state.presentIndex - 1, 
-      present: state.actionStack[state.presentIndex - 1]
+      ...state,
+      currentIndex: state.currentIndex - 1
     }
   }
   return state;
 }
 
 function redo(state) {
-  if(state.actionStack.length - 1 > state.presentIndex) {
+  if(state.actionStack.length - 1 > state.currentIndex) {
     return {
-      ...state, 
-      presentIndex: state.presentIndex + 1, 
-      present: state.actionStack[state.presentIndex + 1]
+      ...state,
+      currentIndex: state.currentIndex + 1
     }
   }
   return state;
