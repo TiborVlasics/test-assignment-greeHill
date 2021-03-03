@@ -39,12 +39,16 @@ const withHistoryHandling = WrappedComponent => props => {
     dispatch({ type: 'setAction', payload: newAction });
   };
 
-  function onUndo() {
-      dispatch({ type: 'undo' });
+  function onUndo(amount) {
+    if(isUndoAvailable) {
+      dispatch({ type: 'undo', payload: amount });
+    }
   };
 
-  function onRedo() {
-      dispatch({ type: 'redo' });
+  function onRedo(amount) {
+    if(isRedoAvailable) {
+      dispatch({ type: 'redo', payload: amount });
+    }
   };
   
   return <WrappedComponent 

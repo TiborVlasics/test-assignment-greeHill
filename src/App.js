@@ -3,16 +3,19 @@ import NewActionForm from './NewActionForm';
 import { StateProvider } from './providers/StateProvider';
 import withHistoryHandling from './withHistoryHandling';
 import ActionHistory from './ActionHistory';
+import UndoRedoButtons from './UndoRedoButtons';
 
 function App() {
   const ActionFormWithHistory = withHistoryHandling(NewActionForm);
-  const ActionListWithHistoryHandling = withHistoryHandling(ActionHistory);
+  const ActionListWithHistory = withHistoryHandling(ActionHistory);
+  const UndoRedoButtonsWithHistory = withHistoryHandling(UndoRedoButtons);
 
   return (
     <div className="App">
       <StateProvider>
         <ActionFormWithHistory></ActionFormWithHistory>
-        <ActionListWithHistoryHandling></ActionListWithHistoryHandling>
+        <UndoRedoButtonsWithHistory></UndoRedoButtonsWithHistory>
+        <ActionListWithHistory></ActionListWithHistory>
       </StateProvider>
     </div>
   );

@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 
 function NewActionForm(props) {
-  const [config, setConfig] = useState(props.currentAction);
+  const [action, setAction] = useState(props.currentAction);
 
   useEffect(() => {
-      setConfig(props.currentAction)
+      setAction(props.currentAction)
   }, [props.currentAction])
 
   const handlechange = function(key) {
-    setConfig({ ...config, [key]: !config[key] });
+    setAction({ ...action, [key]: !action[key] });
   }
 
   return (
@@ -18,7 +18,7 @@ function NewActionForm(props) {
         <input
           id="dev"
           type="checkbox"
-          checked={config.dev}
+          checked={action.dev}
           onChange={() => handlechange('dev')}
         />
       </div>
@@ -27,7 +27,7 @@ function NewActionForm(props) {
         <input
             id="qa"
             type="checkbox"
-            checked={config.qa}
+            checked={action.qa}
             onChange={() => handlechange('qa')}
         />
       </div>
@@ -36,21 +36,13 @@ function NewActionForm(props) {
         <input
             id="prod"
             type="checkbox"
-            checked={config.prod}
+            checked={action.prod}
             onChange={() => handlechange('prod')}
         />
       </div>
       <div>
-        <button onClick={() => props.onAction(config)}>
+        <button onClick={() => props.onAction(action)}>
           Set Action
-        </button>
-      </div>
-      <div>
-        <button disabled={!props.isUndoAvailable} onClick={() => props.onUndo()}>
-          Undo
-        </button>
-        <button disabled={!props.isRedoAvailable} onClick={() => props.onRedo()}>
-          redo
         </button>
       </div>
     </div>
