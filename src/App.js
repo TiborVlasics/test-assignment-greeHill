@@ -1,9 +1,9 @@
 import './App.css';
-import NewActionForm from './NewActionForm';
+import NewActionForm from './components/NewActionForm';
 import { StateProvider } from './providers/StateProvider';
-import withHistoryHandling from './withHistoryHandling';
-import ActionHistory from './ActionHistory';
-import UndoRedoButtons from './UndoRedoButtons';
+import withHistoryHandling from './components/withHistoryHandling';
+import ActionHistory from './components/ActionHistory';
+import UndoRedoButtons from './components/UndoRedoButtons';
 
 function App() {
   const ActionFormWithHistory = withHistoryHandling(NewActionForm);

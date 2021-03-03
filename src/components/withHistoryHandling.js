@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
-import useCurrentAction from "./hooks/useCurrentAction";
-import { store } from "./providers/StateProvider";
+import useCurrentAction from "../hooks/useCurrentAction";
+import { store } from "../providers/StateProvider";
 
 const withHistoryHandling = WrappedComponent => props => {
   const {dispatch, state} = useContext(store);
@@ -19,8 +19,6 @@ const withHistoryHandling = WrappedComponent => props => {
   }, [state])
 
   /**
-   * 
-   * @param {*} action 
    * 
    * Dispatches the changed properties, to the action stack
    */
