@@ -13,33 +13,18 @@ function NewActionForm(props) {
 
   return (
     <div>
-      <div>
-        <label htmlFor="dev">Dev</label>
-        <input
-          id="dev"
-          type="checkbox"
-          checked={action.dev}
-          onChange={() => handlechange('dev')}
-        />
-      </div>
-      <div>
-        <label htmlFor="qa">QA</label>
-        <input
-            id="qa"
-            type="checkbox"
-            checked={action.qa}
-            onChange={() => handlechange('qa')}
-        />
-      </div>
-      <div>
-        <label htmlFor="prod">Prod</label>
-        <input
-            id="prod"
-            type="checkbox"
-            checked={action.prod}
-            onChange={() => handlechange('prod')}
-        />
-      </div>
+      {["dev", "qa", "prod"].map(key => {
+        return (
+          <div key={key}>
+            <label htmlFor="{key}">{key}</label>
+            <input
+              id="{key}"
+              type="checkbox"
+              checked={action[key]}
+              onChange={() => handlechange(key)}
+            />
+          </div>
+      )})}
       <div>
         <button onClick={() => props.onAction(action)}>
           Set Action
